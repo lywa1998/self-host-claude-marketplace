@@ -1,0 +1,17 @@
+{
+    "name": "SelfHost",
+    "owner": {
+        "name": "lywa1998",
+        "email": "luya.wang@qq.com"
+    },
+    "plugins": [
+        {
+            "name": "rust-skills",
+            "source": "./plugins/rust-skills",
+            "author": {
+                "name": "AlexZ",
+                "email": "blackanger.z@gmail.com"
+            }
+        }
+    ]
+}

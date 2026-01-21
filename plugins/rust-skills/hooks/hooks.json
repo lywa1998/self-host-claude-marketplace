@@ -1,0 +1,15 @@
+{
+    "hooks": {
+        "UserPromptSubmit": [
+            {
+                "matcher": "(?i)(rust|cargo|rustc|crate|ownership|borrow|lifetime|async|await|trait|generic|unsafe|ffi|error|result|option|tokio|serde|axum|E0\\d{3,4}|value moved|cannot borrow|does not live long enough|mismatched types|not satisfied|Send|Sync|concurrency|所有权|借用|生命周期|异步|并发|错误处理|类型|编译|版本|意图分析|问题分析|语义分析|问题|怎么用|怎么|如何|为什么|什么是|帮我写|帮我|实现|解释|区别|最佳实践|best practice|implement|explain|difference|how to|why|what is|创建.*项目|创建.*skill|create.*skill|动态.*skill)",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "${CLAUDE_PLUGIN_ROOT}/hooks/rust-skill-eval-hook.sh"
+                    }
+                ]
+            }
+        ]
+    }
+}

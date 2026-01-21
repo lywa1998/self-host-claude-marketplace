@@ -1,0 +1,24 @@
+{
+    "name": "rust-skills",
+    "version": "1.0.0",
+    "description": "Comprehensive Rust development assistant with meta-question routing, coding guidelines, version queries, and ecosystem support",
+    "author": {
+        "name": "AlexZ",
+        "email": "blackanger.z@gmail.com"
+    },
+    "repository": "https://github.com/ZhangHanDong/rust-skills",
+    "homepage": "https://github.com/ZhangHanDong/rust-skills",
+    "license": "MIT",
+    "keywords": [
+        "rust",
+        "cargo",
+        "ownership",
+        "borrow-checker",
+        "async",
+        "tokio",
+        "error-handling",
+        "coding-guidelines",
+        "unsafe",
+        "ffi"
+    ]
+}
