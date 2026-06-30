@@ -4,6 +4,7 @@
 
 > メタ認知フレームワークを備えた AI Rust 開発アシスタント
 
+[![Version](https://img.shields.io/badge/version-2.0.9-green.svg)](https://github.com/actionbook/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blue)](https://github.com/anthropics/claude-code)
 
@@ -45,38 +46,106 @@ AI (Rust Skills 使用):
 
 ## インストール
 
-### 方法1：完全プラグイン（推奨）
+Rust Skills は2つのインストールモードをサポートしています：
 
-この方法は **hooks を含むすべての機能**を有効にし、メタ認知を自動的にトリガーします。
+- **Plugin モード**（Claude Code）：hooks、agents、自動メタ認知トリガーを含む完全機能
+- **Skills-only モード**：skills をサポートする任意のコーディングエージェントで動作（Claude Code、Vercel AI など）
+
+---
+
+### Skills-only インストール（推奨）
+
+最もシンプルな方法。Claude Code、[Vercel `add-skills`](https://github.com/nicepkg/add-skills) など、**skills をサポートする任意のコーディングエージェント**で動作します。
+
+Skills には**インラインフォールバックロジック**が組み込まれており、エージェントファイルが利用できない場合、組み込みツール（actionbook、agent-browser、WebFetch）を使用して直接実行します。
+
+#### 方法 A：NPX（最も簡単）
+
+```bash
+npx skills add actionbook/rust-skills
+```
+
+#### 方法 B：CoWork CLI
+
+[CoWork](https://crates.io/crates/cowork)（Rust ベースの skills 管理ツール）を使用してインストール：
+
+```bash
+# CoWork をインストール
+cargo install cowork
+
+# 方法 1：直接インストール
+cowork install actionbook/rust-skills
+
+# 方法 2：設定ファイルベースのインストール（チーム向け推奨）
+cowork config init                    # .cowork/Skills.toml を作成
+# Skills.toml を編集して rust-skills を追加（下記参照）
+cowork config install                 # 設定された全 skills をインストール
+```
+
+**Skills.toml 設定例：**
+
+```toml
+[project]
+name = "my-rust-project"
+
+[skills.install]
+rust-skills = "actionbook/rust-skills"
+
+[security]
+trusted_authors = ["ZhangHanDong"]
+```
+
+> CoWork（短縮形 `co`）はバージョン管理、依存関係解決、lock ファイル、セキュリティ監査を提供します。詳細は [CoWork ドキュメント](https://crates.io/crates/cowork) を参照してください。
+
+#### 方法 C：手動コピー
+
+```bash
+git clone https://github.com/actionbook/rust-skills.git
+cp -r rust-skills/skills/* ~/.claude/skills/
+```
+
+> **注意**：Skills-only モードには hooks が含まれないため、メタ認知は自動トリガーされません。`/rust-router` または特定の skills を手動で呼び出せます。バックグラウンドエージェントは自動的にインライン実行にフォールバックします。
+
+---
+
+### Claude Code Plugin インストール（完全機能）
+
+hooks、バックグラウンドエージェント、自動メタ認知トリガーを含む完全な体験を求める **Claude Code ユーザー**向け。
+
+#### 方法 A：Marketplace
+
+```bash
+# ステップ 1: marketplace を追加
+/plugin marketplace add actionbook/rust-skills
+
+# ステップ 2: プラグインをインストール
+/plugin install rust-skills@rust-skills
+```
+
+> **注意**：ステップ 1 は marketplace（プラグインソース）を追加するだけです。ステップ 2 で実際に rust-skills プラグインをインストールし、すべての機能を有効にします。
+
+#### 方法 B：完全プラグイン（ローカル）
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/ZhangHanDong/rust-skills.git
+git clone https://github.com/actionbook/rust-skills.git
 
 # プラグインディレクトリで起動
 claude --plugin-dir /path/to/rust-skills
 ```
 
-### 方法2：Skills のみ
-
-この方法は skills のみをインストールし、hooks は含まれません。skills を手動で呼び出す必要があります。
-
-```bash
-# クローンして skills をコピー
-git clone https://github.com/ZhangHanDong/rust-skills.git
-cp -r rust-skills/skills/* ~/.claude/skills/
-```
-
-> ⚠️ **注意**：hooks がない場合、メタ認知は自動的にトリガーされません。`/rust-router` または特定の skills を手動で呼び出す必要があります。
+---
 
 ### 機能比較
 
-| 機能 | 完全プラグイン | Skills のみ |
-|------|----------------|-------------|
-| すべての Skills | ✅ | ✅ |
-| 自動メタ認知トリガー | ✅ | ❌ |
-| Hook ルーティング | ✅ | ❌ |
-| バックグラウンドエージェント | ✅ | ✅ |
+| 機能 | Plugin（Marketplace） | Plugin（ローカル） | Skills-only（NPX/CoWork/手動） |
+|------|---------------------|-------------------|-------------------------------|
+| 全 31 Skills | ✅ | ✅ | ✅ |
+| 自動メタ認知トリガー | ✅ | ✅ | ❌（手動呼び出し） |
+| Hook ルーティング | ✅ | ✅ | ❌ |
+| バックグラウンドエージェント | ✅ | ✅ | ✅（インラインフォールバック） |
+| 簡単な更新 | ✅ | ❌ | ✅（NPX/CoWork） |
+| 他のエージェントとの互換性 | ❌ | ❌ | ✅ |
 
 ### 権限設定
 
@@ -108,6 +177,15 @@ EOF
 
 - **OpenCode**: [.opencode/INSTALL.md](.opencode/INSTALL.md) を参照
 - **Codex**: [.codex/INSTALL.md](.codex/INSTALL.md) を参照
+
+## 依存 Skills
+
+Rust Skills は完全な機能のために以下の外部ツールに依存しています：
+
+| ツール | 説明 | GitHub |
+|--------|------|--------|
+| **actionbook** | ウェブサイトアクションマニュアル用 MCP サーバー。エージェントが構造化されたウェブコンテンツ（Rust リリース、crate 情報、ドキュメント）を取得するために使用。 | [actionbook/actionbook](https://github.com/actionbook/actionbook) |
+| **agent-browser** | リアルタイムウェブデータ取得のためのブラウザ自動化ツール。actionbook が利用できない場合のフォールバック。 | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) |
 
 ## メタ認知フレームワーク
 
@@ -253,11 +331,16 @@ cd my-rust-project
 
 貢献を歓迎します！PR を提出する前に貢献ガイドラインをお読みください。
 
+## 謝辞
+
+- [@pinghe](https://github.com/pinghe) - `context: fork` サポートの提案 ([#4](https://github.com/actionbook/rust-skills/issues/4))
+- [@DoiiarX](https://github.com/DoiiarX) - OpenCode インストール修正 ([#6](https://github.com/actionbook/rust-skills/issues/6))
+
 ## ライセンス
 
 MIT ライセンス - 詳細は [LICENSE](LICENSE) を参照
 
 ## リンク
 
-- **GitHub**: https://github.com/ZhangHanDong/rust-skills
-- **Issues**: https://github.com/ZhangHanDong/rust-skills/issues
+- **GitHub**: https://github.com/actionbook/rust-skills
+- **Issues**: https://github.com/actionbook/rust-skills/issues

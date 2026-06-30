@@ -1,5 +1,6 @@
 {
-    "name": "SelfHost",
+    "name": "self-host",
+    "description": "Personal self-hosted Claude Code plugin marketplace",
     "owner": {
         "name": "lywa1998",
         "email": "luya.wang@qq.com"
@@ -7,11 +8,35 @@
     "plugins": [
         {
             "name": "rust-skills",
-            "source": "./plugins/rust-skills",
+            "source": "./plugins/rust",
+            "description": "Comprehensive Rust development assistant with meta-question routing, coding guidelines, version queries, and ecosystem support",
+            "version": "2.1.0",
             "author": {
-                "name": "AlexZ",
+                "name": "ZhangHanDong",
                 "email": "blackanger.z@gmail.com"
             }
+        },
+        {
+            "name": "agent-browser",
+            "source": "./plugins/agent-browser",
+            "description": "Browser automation CLI for AI agents — navigate, click, fill, screenshot, extract data",
+            "version": "1.0.0",
+            "author": {
+                "name": "Vercel Labs",
+                "email": "support@vercel.com"
+            }
+        },
+        {
+            "name": "tools",
+            "source": "./plugins/tools",
+            "description": "Utility tools — book-to-skill converter and more",
+            "version": "1.0.0"
+        },
+        {
+            "name": "finance",
+            "source": "./plugins/finance",
+            "description": "Financial trading skills — Hyperliquid copy-trade, candlestick analysis",
+            "version": "1.0.0"
         }
     ]
 }

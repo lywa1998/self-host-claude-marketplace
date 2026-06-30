@@ -4,6 +4,7 @@
 
 > AI-powered Rust development assistant with meta-cognition framework
 
+[![Version](https://img.shields.io/badge/version-2.0.9-green.svg)](https://github.com/actionbook/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blue)](https://github.com/anthropics/claude-code)
 
@@ -45,38 +46,106 @@ AI (with Rust Skills):
 
 ## Installation
 
-### Method 1: Full Plugin (Recommended)
+Rust Skills supports two installation modes:
 
-This method enables **all features including hooks** for automatic meta-cognition triggering.
+- **Plugin Mode** (Claude Code): Full features including hooks, agents, and auto meta-cognition
+- **Skills-only Mode**: Works with any coding agent that supports skills (Claude Code, Vercel AI, etc.)
+
+---
+
+### Skills-only Install (Recommended)
+
+The simplest way to get started. Works with **any coding agent** that supports skills, including Claude Code, [Vercel's `add-skills`](https://github.com/nicepkg/add-skills), and others.
+
+Skills now include **inline fallback logic** — when agent files are not available, skills execute directly using built-in tools (actionbook, agent-browser, WebFetch).
+
+#### Option A: NPX (Easiest)
+
+```bash
+npx skills add actionbook/rust-skills
+```
+
+#### Option B: CoWork CLI
+
+Install via [CoWork](https://crates.io/crates/cowork), a Rust-based skills management tool:
+
+```bash
+# Install CoWork
+cargo install cowork
+
+# Method 1: Direct install
+cowork install actionbook/rust-skills
+
+# Method 2: Config-based install (recommended for teams)
+cowork config init                    # Create .cowork/Skills.toml
+# Edit Skills.toml to add rust-skills (see below)
+cowork config install                 # Install all configured skills
+```
+
+**Skills.toml configuration:**
+
+```toml
+[project]
+name = "my-rust-project"
+
+[skills.install]
+rust-skills = "actionbook/rust-skills"
+
+[security]
+trusted_authors = ["ZhangHanDong"]
+```
+
+> CoWork (`co` for short) provides version management, dependency resolution, lock files, and security auditing. See [CoWork documentation](https://crates.io/crates/cowork) for more details.
+
+#### Option C: Manual Copy
+
+```bash
+git clone https://github.com/actionbook/rust-skills.git
+cp -r rust-skills/skills/* ~/.claude/skills/
+```
+
+> **Note**: Skills-only mode does not include hooks, so meta-cognition won't trigger automatically. You can manually call `/rust-router` or specific skills. Background agents fall back to inline execution automatically.
+
+---
+
+### Claude Code Plugin Install (Full Features)
+
+For **Claude Code users** who want the complete experience with hooks, background agents, and auto meta-cognition triggering.
+
+#### Option A: Marketplace
+
+```bash
+# Step 1: Add the marketplace
+/plugin marketplace add actionbook/rust-skills
+
+# Step 2: Install the plugin
+/plugin install rust-skills@rust-skills
+```
+
+> **Note**: Step 1 only adds the marketplace (plugin source). Step 2 actually installs the rust-skills plugin with all features enabled.
+
+#### Option B: Full Plugin (Local)
 
 ```bash
 # Clone the repository
-git clone https://github.com/ZhangHanDong/rust-skills.git
+git clone https://github.com/actionbook/rust-skills.git
 
 # Launch with plugin directory
 claude --plugin-dir /path/to/rust-skills
 ```
 
-### Method 2: Skills Only
-
-This method only installs skills without hooks. You need to manually invoke skills.
-
-```bash
-# Clone and copy skills
-git clone https://github.com/ZhangHanDong/rust-skills.git
-cp -r rust-skills/skills/* ~/.claude/skills/
-```
-
-> ⚠️ **Note**: Without hooks, meta-cognition won't trigger automatically. You must manually call `/rust-router` or specific skills.
+---
 
 ### Feature Comparison
 
-| Feature | Full Plugin | Skills Only |
-|---------|-------------|-------------|
-| All Skills | ✅ | ✅ |
-| Auto meta-cognition trigger | ✅ | ❌ |
-| Hook-based routing | ✅ | ❌ |
-| Background agents | ✅ | ✅ |
+| Feature | Plugin (Marketplace) | Plugin (Local) | Skills-only (NPX/CoWork/Manual) |
+|---------|---------------------|----------------|--------------------------------|
+| All 31 Skills | ✅ | ✅ | ✅ |
+| Auto meta-cognition trigger | ✅ | ✅ | ❌ (manual invoke) |
+| Hook-based routing | ✅ | ✅ | ❌ |
+| Background agents | ✅ | ✅ | ✅ (inline fallback) |
+| Easy updates | ✅ | ❌ | ✅ (NPX/CoWork) |
+| Works with other agents | ❌ | ❌ | ✅ |
 
 ### Permission Configuration
 
@@ -108,6 +177,15 @@ See [.claude/settings.example.json](.claude/settings.example.json) for reference
 
 - **OpenCode**: See [.opencode/INSTALL.md](.opencode/INSTALL.md)
 - **Codex**: See [.codex/INSTALL.md](.codex/INSTALL.md)
+
+## Dependent Skills
+
+Rust Skills relies on these external tools for full functionality:
+
+| Tool | Description | GitHub |
+|------|-------------|--------|
+| **actionbook** | MCP server for website action manuals. Used by agents to fetch structured web content (Rust releases, crate info, documentation). | [actionbook/actionbook](https://github.com/actionbook/actionbook) |
+| **agent-browser** | Browser automation tool for fetching real-time web data. Fallback when actionbook is unavailable. | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) |
 
 ## Meta-Cognition Framework
 
@@ -253,11 +331,16 @@ Domain-correct architectural solution
 
 Contributions are welcome! Please read our contributing guidelines before submitting PRs.
 
+## Acknowledgments
+
+- [@pinghe](https://github.com/pinghe) - `context: fork` support suggestion ([#4](https://github.com/actionbook/rust-skills/issues/4))
+- [@DoiiarX](https://github.com/DoiiarX) - OpenCode installation fix ([#6](https://github.com/actionbook/rust-skills/issues/6))
+
 ## License
 
 MIT License - see [LICENSE](LICENSE) for details.
 
 ## Links
 
-- **GitHub**: https://github.com/ZhangHanDong/rust-skills
-- **Issues**: https://github.com/ZhangHanDong/rust-skills/issues
+- **GitHub**: https://github.com/actionbook/rust-skills
+- **Issues**: https://github.com/actionbook/rust-skills/issues

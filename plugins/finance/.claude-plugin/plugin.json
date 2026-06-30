@@ -1,0 +1,6 @@
+{
+    "name": "finance",
+    "version": "1.0.0",
+    "description": "Financial trading skills — Hyperliquid copy-trade automation and candlestick pattern analysis",
+    "license": "MIT"
+}

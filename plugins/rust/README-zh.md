@@ -4,6 +4,7 @@
 
 > 基于元认知框架的 AI Rust 开发助手
 
+[![Version](https://img.shields.io/badge/version-2.0.9-green.svg)](https://github.com/actionbook/rust-skills/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Plugin-blue)](https://github.com/anthropics/claude-code)
 
@@ -45,38 +46,106 @@ AI (使用 Rust Skills):
 
 ## 安装
 
-### 方式一：完整插件安装（推荐）
+Rust Skills 支持两种安装模式：
 
-此方式启用**所有功能，包括 hooks**，自动触发元认知流程。
+- **Plugin 模式**（Claude Code）：完整功能，包含 hooks、agents 和自动元认知触发
+- **Skills-only 模式**：适用于任何支持 skills 的编码助手（Claude Code、Vercel AI 等）
+
+---
+
+### Skills-only 安装（推荐）
+
+最简单的安装方式。适用于**任何支持 skills 的编码助手**，包括 Claude Code、[Vercel `add-skills`](https://github.com/nicepkg/add-skills) 等。
+
+Skills 现已内置**内联回退逻辑** —— 当 agent 文件不可用时，skills 会使用内置工具（actionbook、agent-browser、WebFetch）直接执行。
+
+#### 方式 A：NPX（最简单）
+
+```bash
+npx skills add actionbook/rust-skills
+```
+
+#### 方式 B：CoWork CLI
+
+通过 [CoWork](https://crates.io/crates/cowork)（基于 Rust 的 skills 管理工具）安装：
+
+```bash
+# 安装 CoWork
+cargo install cowork
+
+# 方式 1：直接安装
+cowork install actionbook/rust-skills
+
+# 方式 2：配置文件安装（推荐团队使用）
+cowork config init                    # 创建 .cowork/Skills.toml
+# 编辑 Skills.toml 添加 rust-skills（见下方配置）
+cowork config install                 # 安装所有配置的 skills
+```
+
+**Skills.toml 配置示例：**
+
+```toml
+[project]
+name = "my-rust-project"
+
+[skills.install]
+rust-skills = "actionbook/rust-skills"
+
+[security]
+trusted_authors = ["ZhangHanDong"]
+```
+
+> CoWork（简写 `co`）提供版本管理、依赖解析、lock 文件和安全审计功能。详见 [CoWork 文档](https://crates.io/crates/cowork)。
+
+#### 方式 C：手动复制
+
+```bash
+git clone https://github.com/actionbook/rust-skills.git
+cp -r rust-skills/skills/* ~/.claude/skills/
+```
+
+> **注意**：Skills-only 模式不包含 hooks，元认知不会自动触发。可以手动调用 `/rust-router` 或特定 skills。后台 agents 会自动回退到内联执行模式。
+
+---
+
+### Claude Code Plugin 安装（完整功能）
+
+适用于想要获得完整体验的 **Claude Code 用户**，包含 hooks、后台 agents 和自动元认知触发。
+
+#### 方式 A：Marketplace
+
+```bash
+# 步骤 1: 添加 marketplace
+/plugin marketplace add actionbook/rust-skills
+
+# 步骤 2: 安装插件
+/plugin install rust-skills@rust-skills
+```
+
+> **注意**：步骤 1 仅添加 marketplace（插件源）。步骤 2 才是真正安装 rust-skills 插件，启用所有功能。
+
+#### 方式 B：完整插件（本地）
 
 ```bash
 # 克隆仓库
-git clone https://github.com/ZhangHanDong/rust-skills.git
+git clone https://github.com/actionbook/rust-skills.git
 
 # 使用插件目录启动
 claude --plugin-dir /path/to/rust-skills
 ```
 
-### 方式二：仅安装 Skills
-
-此方式仅安装 skills，不包含 hooks。需要手动调用 skills。
-
-```bash
-# 克隆并复制 skills
-git clone https://github.com/ZhangHanDong/rust-skills.git
-cp -r rust-skills/skills/* ~/.claude/skills/
-```
-
-> ⚠️ **注意**：没有 hooks，元认知不会自动触发。需要手动调用 `/rust-router` 或特定 skills。
+---
 
 ### 功能对比
 
-| 功能 | 完整插件 | 仅 Skills |
-|------|----------|-----------|
-| 所有 Skills | ✅ | ✅ |
-| 自动触发元认知 | ✅ | ❌ |
-| Hook 路由 | ✅ | ❌ |
-| 后台 Agents | ✅ | ✅ |
+| 功能 | Plugin（Marketplace） | Plugin（本地） | Skills-only（NPX/CoWork/手动） |
+|------|---------------------|---------------|-------------------------------|
+| 全部 31 个 Skills | ✅ | ✅ | ✅ |
+| 自动触发元认知 | ✅ | ✅ | ❌（手动调用） |
+| Hook 路由 | ✅ | ✅ | ❌ |
+| 后台 Agents | ✅ | ✅ | ✅（内联回退） |
+| 便捷更新 | ✅ | ❌ | ✅（NPX/CoWork） |
+| 兼容其他编码助手 | ❌ | ❌ | ✅ |
 
 ### 权限配置
 
@@ -108,6 +177,15 @@ EOF
 
 - **OpenCode**: 参见 [.opencode/INSTALL.md](.opencode/INSTALL.md)
 - **Codex**: 参见 [.codex/INSTALL.md](.codex/INSTALL.md)
+
+## 依赖 Skills
+
+Rust Skills 依赖以下外部工具以获得完整功能：
+
+| 工具 | 说明 | GitHub |
+|------|------|--------|
+| **actionbook** | 网站操作手册 MCP 服务器。用于 agents 获取结构化网页内容（Rust 版本、crate 信息、文档）。 | [actionbook/actionbook](https://github.com/actionbook/actionbook) |
+| **agent-browser** | 浏览器自动化工具，用于获取实时网页数据。作为 actionbook 不可用时的备选方案。 | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) |
 
 ## 元认知框架
 
@@ -253,11 +331,16 @@ cd my-rust-project
 
 欢迎贡献！提交 PR 前请阅读贡献指南。
 
+## 致谢
+
+- [@pinghe](https://github.com/pinghe) - `context: fork` 支持建议 ([#4](https://github.com/actionbook/rust-skills/issues/4))
+- [@DoiiarX](https://github.com/DoiiarX) - OpenCode 安装修复 ([#6](https://github.com/actionbook/rust-skills/issues/6))
+
 ## 许可证
 
 MIT 许可证 - 详见 [LICENSE](LICENSE)
 
 ## 链接
 
-- **GitHub**: https://github.com/ZhangHanDong/rust-skills
-- **Issues**: https://github.com/ZhangHanDong/rust-skills/issues
+- **GitHub**: https://github.com/actionbook/rust-skills
+- **Issues**: https://github.com/actionbook/rust-skills/issues

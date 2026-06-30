@@ -1,7 +1,8 @@
 ---
 name: core-actionbook
-# Internal tool - no description to prevent auto-triggering
-# Used by: rust-learner agents for pre-computed selectors
+description: "Internal support skill for actionbook MCP selectors used by Rust documentation research workflows. Use only when another rust-skills workflow explicitly requests actionbook-backed selectors."
+user-invocable: false
+disable-model-invocation: true
 ---
 
 # Actionbook
