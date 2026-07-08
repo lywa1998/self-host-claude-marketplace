@@ -1,0 +1,11 @@
+{
+  "name": "search",
+  "version": "1.0.0",
+  "description": "Comprehensive web search and research toolkit — Tavily MCP (search/extract), Tavily CLI skills (search/extract/crawl/map/research), and agent-browser for browser automation",
+  "author": {
+    "name": "lywa1998",
+    "email": "luya.wang@qq.com"
+  },
+  "homepage": "https://docs.tavily.com",
+  "license": "MIT"
+}

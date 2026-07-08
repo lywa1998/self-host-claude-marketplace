@@ -17,13 +17,23 @@
             }
         },
         {
-            "name": "agent-browser",
-            "source": "./plugins/agent-browser",
-            "description": "Browser automation CLI for AI agents — navigate, click, fill, screenshot, extract data",
+            "name": "search",
+            "source": "./plugins/search",
+            "description": "Comprehensive web search and research toolkit — Tavily MCP (search/extract), Tavily CLI skills (search/extract/crawl/map/research), and agent-browser for browser automation",
             "version": "1.0.0",
             "author": {
-                "name": "Vercel Labs",
-                "email": "support@vercel.com"
+                "name": "lywa1998",
+                "email": "luya.wang@qq.com"
+            }
+        },
+        {
+            "name": "isaac-sim",
+            "source": "./plugins/isaac-sim",
+            "description": "NVIDIA Isaac Sim 具身智能开发工具包 — 场景编排、机器人资产管线、物理仿真、导航、抓取、传感器、渲染、SDG、USD 管线等完整技能链",
+            "version": "1.0.0",
+            "author": {
+                "name": "lywa1998",
+                "email": "luya.wang@qq.com"
             }
         },
         {
@@ -37,6 +47,16 @@
             "source": "./plugins/finance",
             "description": "Financial trading skills — Hyperliquid copy-trade, candlestick analysis",
             "version": "1.0.0"
+        },
+        {
+            "name": "science",
+            "source": "./plugins/science",
+            "description": "AI research assistant powered by alphaXiv MCP — discover papers, read content, query PDFs, explore GitHub code, and manage your library",
+            "version": "1.0.0",
+            "author": {
+                "name": "lywa1998",
+                "email": "luya.wang@qq.com"
+            }
         }
     ]
 }

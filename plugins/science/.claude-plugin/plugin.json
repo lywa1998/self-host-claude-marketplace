@@ -1,0 +1,10 @@
+{
+  "name": "science",
+  "version": "1.0.0",
+  "description": "AI-powered research assistant powered by alphaXiv MCP — discover papers, analyze PDFs, explore code, and manage your library",
+  "author": {
+    "name": "lywa1998"
+  },
+  "homepage": "https://alphaxiv.org",
+  "license": "MIT"
+}

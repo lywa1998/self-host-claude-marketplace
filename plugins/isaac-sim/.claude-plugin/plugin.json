@@ -1,0 +1,10 @@
+{
+  "name": "isaac-sim",
+  "version": "1.0.0",
+  "description": "NVIDIA Isaac Sim 具身智能开发工具包 — 涵盖场景编排、机器人资产管线、物理仿真、导航、抓取、传感器、渲染、SDG、USD 管线等完整技能链",
+  "author": {
+    "name": "lywa1998"
+  },
+  "homepage": "https://github.com/isaac-sim/IsaacSim",
+  "license": "Apache-2.0"
+}
