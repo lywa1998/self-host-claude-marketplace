@@ -1,5 +1,5 @@
 ---
-description: Extract clean markdown/text content from URLs using Tavily — handles JavaScript-rendered pages
+description: Extract clean markdown/text content from URLs using Tavily — handles JavaScript-rendered pages. Requires Tavily MCP server setup (see tavily-search skill).
 ---
 
 # tavily-extract
