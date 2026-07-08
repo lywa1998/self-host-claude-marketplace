@@ -6,5 +6,13 @@
     "name": "lywa1998"
   },
   "homepage": "https://alphaxiv.org",
-  "license": "MIT"
+  "license": "MIT",
+  "mcpServers": {
+    "alphaxiv": {
+      "url": "https://api.alphaxiv.org/mcp/v1",
+      "auth": {
+        "strategy": "oauth"
+      }
+    }
+  }
 }
