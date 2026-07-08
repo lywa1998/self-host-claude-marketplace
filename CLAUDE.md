@@ -42,12 +42,7 @@ claude plugin validate ./plugins/<name>
 
 ## 当前插件
 
-| 插件 | 来源 | 包含 |
-|------|------|------|
-| **rust-skills** | `plugins/rust/` | 24 Rust 开发 skills + agents + hooks + commands + MCP |
-| **agent-browser** | `plugins/agent-browser/` | 浏览器自动化 CLI skill |
-| **tools** | `plugins/tools/` | book-to-skill 转换工具（Python） |
-| **finance** | `plugins/finance/` | Hyperliquid 跟单 + 蜡烛图技术分析 |
+查看 `.claude-plugin/marketplace.json` 中的 `plugins` 数组，或使用 `claude plugin list` 查看所有已注册的插件。
 
 ## 注意事项
 

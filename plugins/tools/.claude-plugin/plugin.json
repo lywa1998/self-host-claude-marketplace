@@ -2,5 +2,9 @@
     "name": "tools",
     "version": "1.0.0",
     "description": "Utility tools — book-to-skill converter and other productivity skills",
+    "author": {
+        "name": "lywa1998",
+        "email": "luya.wang@qq.com"
+    },
     "license": "MIT"
 }

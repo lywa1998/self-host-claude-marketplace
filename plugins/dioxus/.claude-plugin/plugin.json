@@ -1,0 +1,11 @@
+{
+  "name": "dioxus",
+  "version": "1.0.0",
+  "description": "Dioxus full-stack web framework skills — platforms, RSX syntax, state management, CLI setup, deployment guides",
+  "author": {
+    "name": "lywa1998",
+    "email": "luya.wang@qq.com"
+  },
+  "homepage": "https://dioxuslabs.com",
+  "license": "MIT"
+}

@@ -2,5 +2,9 @@
     "name": "finance",
     "version": "1.0.0",
     "description": "Financial trading skills — Hyperliquid copy-trade automation and candlestick pattern analysis",
+    "author": {
+        "name": "lywa1998",
+        "email": "luya.wang@qq.com"
+    },
     "license": "MIT"
 }

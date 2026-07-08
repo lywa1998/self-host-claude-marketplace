@@ -7,5 +7,11 @@
     "email": "luya.wang@qq.com"
   },
   "homepage": "https://docs.tavily.com",
-  "license": "MIT"
+  "license": "MIT",
+  "mcpServers": {
+    "tavily": {
+      "type": "http",
+      "url": "https://mcp.tavily.com/mcp"
+    }
+  }
 }

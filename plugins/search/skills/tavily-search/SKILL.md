@@ -1,17 +1,5 @@
 ---
-description: Tavily web search — real-time LLM-optimized search results with content snippets and relevance scores. Requires manual MCP server setup (see below).
----
-
-## Setup (Required)
-
-Add the Tavily MCP server:
-
-```bash
-claude mcp add tavily-remote-mcp --transport http https://mcp.tavily.com/mcp/
-```
-
-Then follow the OAuth flow in your browser to authorize access.
-
+description: Tavily web search — real-time LLM-optimized search results with content snippets and relevance scores
 ---
 
 # tavily-search

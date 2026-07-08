@@ -40,18 +40,36 @@
             "name": "tools",
             "source": "./plugins/tools",
             "description": "Utility tools — book-to-skill converter and more",
-            "version": "1.0.0"
+            "version": "1.0.0",
+            "author": {
+                "name": "lywa1998",
+                "email": "luya.wang@qq.com"
+            }
         },
         {
             "name": "finance",
             "source": "./plugins/finance",
             "description": "Financial trading skills — Hyperliquid copy-trade, candlestick analysis",
-            "version": "1.0.0"
+            "version": "1.0.0",
+            "author": {
+                "name": "lywa1998",
+                "email": "luya.wang@qq.com"
+            }
         },
         {
             "name": "science",
             "source": "./plugins/science",
             "description": "AI research assistant powered by alphaXiv MCP — discover papers, read content, query PDFs, explore GitHub code, and manage your library",
+            "version": "1.0.0",
+            "author": {
+                "name": "lywa1998",
+                "email": "luya.wang@qq.com"
+            }
+        },
+        {
+            "name": "dioxus",
+            "source": "./plugins/dioxus",
+            "description": "Dioxus full-stack web framework skills — platforms, RSX syntax, state management, CLI setup, deployment guides",
             "version": "1.0.0",
             "author": {
                 "name": "lywa1998",

@@ -1,16 +1,6 @@
 ---
-description: alphaXiv MCP research assistant — search papers, read content, query PDFs, explore GitHub code, and manage library. Requires manual MCP server setup (see setup guide below).
+description: alphaXiv MCP research assistant — search papers, read content, query PDFs, explore GitHub code, and manage library
 ---
-
-## Setup (Required)
-
-This skill requires the alphaXiv MCP server to be installed manually. Add it to your Claude Code settings:
-
-```bash
-claude mcp add alphaxiv --transport http https://api.alphaxiv.org/mcp/v1
-```
-
-Then follow the OAuth flow in your browser to authorize access.
 
 # alphaXiv Research Assistant
 
